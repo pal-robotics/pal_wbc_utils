@@ -20,7 +20,6 @@
 
 namespace pal
 {
-
 std::string generateTaskDescription(const property_bag::PropertyBag properties)
 {
   std::stringstream ss;
@@ -29,21 +28,21 @@ std::string generateTaskDescription(const property_bag::PropertyBag properties)
   return ss.str();
 }
 
-WBCServiceHelper::WBCServiceHelper(ros::NodeHandle &nh)
-  : nh_(nh)
+WBCServiceHelper::WBCServiceHelper(ros::NodeHandle &nh, const std::string &ns)
+  : nh_(nh), ns_(ns)
 {
   bool persistent = false;  // Not persistent, because when we enable WBC the services are
                             // created, not when the states are created
-  pop_task_srv_ = nh_.serviceClient<pal_wbc_msgs::PopTask>(
-      "/whole_body_kinematic_controller/pop_task", persistent);
-  push_pop_task_srv_ = nh_.serviceClient<pal_wbc_msgs::PushPopTask>(
-      "/whole_body_kinematic_controller/push_pop_task", persistent);
-  push_task_srv_ = nh_.serviceClient<pal_wbc_msgs::PushTask>(
-      "/whole_body_kinematic_controller/push_task", persistent);
-  get_task_error_srv_ = nh_.serviceClient<pal_wbc_msgs::GetTaskError>(
-      "/whole_body_kinematic_controller/get_task_error", persistent);
-  stack_description_srv_ = nh_.serviceClient<pal_wbc_msgs::GetStackDescription>(
-      "/whole_body_kinematic_controller/get_stack_description", persistent);
+  pop_task_srv_ =
+      nh_.serviceClient<pal_wbc_msgs::PopTask>(ns_ + "/pop_task", persistent);
+  push_pop_task_srv_ =
+      nh_.serviceClient<pal_wbc_msgs::PushPopTask>(ns_ + "/push_pop_task", persistent);
+  push_task_srv_ =
+      nh_.serviceClient<pal_wbc_msgs::PushTask>(ns_ + "/push_task", persistent);
+  get_task_error_srv_ =
+      nh_.serviceClient<pal_wbc_msgs::GetTaskError>(ns_ + "/get_task_error", persistent);
+  stack_description_srv_ =
+      nh_.serviceClient<pal_wbc_msgs::GetStackDescription>(ns_ + "/get_stack_description", persistent);
 }
 
 WBCServiceHelper::~WBCServiceHelper()
@@ -68,9 +67,9 @@ std::string WBCServiceHelper::orderToString(pal_wbc_msgs::Order::_order_type ord
 }
 
 bool WBCServiceHelper::pushTask(const property_bag::PropertyBag &properties,
-                            const std::string &task_id,
-                            const pal_wbc_msgs::Order::_order_type &order,
-                            const std::string &respect_task_id)
+                                const std::string &task_id,
+                                const pal_wbc_msgs::Order::_order_type &order,
+                                const std::string &respect_task_id)
 {
   pal_wbc_msgs::PushTask srv;
   property_bag::PropertyBag task_properties;
@@ -111,10 +110,10 @@ bool WBCServiceHelper::popTask(const std::string &task_id)
 }
 
 bool WBCServiceHelper::pushPopTask(const property_bag::PropertyBag &properties,
-                               const std::string &push_task_id,
-                               const pal_wbc_msgs::Order::_order_type &order,
-                               const std::string &push_respect_task_id,
-                               const std::string &pop_task_id)
+                                   const std::string &push_task_id,
+                                   const pal_wbc_msgs::Order::_order_type &order,
+                                   const std::string &push_respect_task_id,
+                                   const std::string &pop_task_id)
 {
   pal_wbc_msgs::PushTaskParams push_task;
   push_task.params = generateTaskDescription(properties);
@@ -163,13 +162,13 @@ bool WBCServiceHelper::printStackDescription()
 }
 
 bool WBCServiceHelper::waitForConvergence(const std::string &task_id, double eps,
-                                      const ros::Duration &timeout, double log_throttle,
-                                      const ros::Duration &check_error_rate,
-                                          const std::function<bool()> &abort_condition )
+                                          const ros::Duration &timeout, double log_throttle,
+                                          const ros::Duration &check_error_rate,
+                                          const std::function<bool()> &abort_condition)
 {
   // Create an instance of persistent service, because it will be spammed
   get_task_error_srv_ = nh_.serviceClient<pal_wbc_msgs::GetTaskError>(
-      "/whole_body_kinematic_controller/get_task_error", true);
+      ns_ + "/get_task_error", true);
   pal_wbc_msgs::TaskError task_error;
   ros::Time timeout_time = ros::Time::now() + timeout;
   do
@@ -182,7 +181,7 @@ bool WBCServiceHelper::waitForConvergence(const std::string &task_id, double eps
       if (abort_condition())
       {
         ROS_WARN_STREAM("Wait for " << task_id << " preempted, remember to "
-                                                   "servicePreempt() in your task");
+                                                  "servicePreempt() in your task");
         return false;
       }
       ros::Duration(0.01).sleep();

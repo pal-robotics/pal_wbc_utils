@@ -31,7 +31,7 @@ std::string generateTaskDescription(const property_bag::PropertyBag properties);
 class WBCServiceHelper
 {
 public:
-  WBCServiceHelper(ros::NodeHandle &nh);
+  WBCServiceHelper(ros::NodeHandle &nh, const std::string &ns = "/whole_body_kinematic_controller");
 
   virtual ~WBCServiceHelper();
 
@@ -71,6 +71,7 @@ public:
   ros::ServiceClient push_pop_task_srv_;
   ros::ServiceClient get_task_error_srv_;
   ros::ServiceClient stack_description_srv_;
+  std::string ns_;
 };
 
 }  // namespace pal
