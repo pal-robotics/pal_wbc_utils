@@ -21,7 +21,6 @@
   <depend>pal_utils</depend>
   <depend>math_utils</depend>
   <depend>roscpp</depend>
-  <depend>pal_robot_tools</depend>
   <depend>pal_ros_utils</depend>
   <depend>pal_wbc_msgs</depend>
   <depend>property_bag</depend>
