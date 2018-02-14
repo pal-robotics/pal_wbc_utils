@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.1 (2018-02-14)
+------------------
 * Merge branch 'check_services' into 'master'
   Add new function to check if services are active
   See merge request control/pal_wbc_utils!3
