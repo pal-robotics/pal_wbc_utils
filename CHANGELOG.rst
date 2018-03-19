@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'wbc-documentation' into 'master'
+  Add push task utilities
+  See merge request control/pal_wbc_utils!4
+* Add push task utilities
+* Contributors: Adria Roig, Victor Lopez
+
 0.0.1 (2018-02-14)
 ------------------
 * Merge branch 'check_services' into 'master'
