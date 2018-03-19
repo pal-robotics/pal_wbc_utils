@@ -25,6 +25,8 @@
   <depend>pal_wbc_msgs</depend>
   <depend>property_bag</depend>
 
+  <exec_depend>reflexxes_adapter</exec_depend>
+
   <export>
   </export>
 </package>

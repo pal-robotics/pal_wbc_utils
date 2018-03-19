@@ -33,7 +33,13 @@ include_directories(
 add_library(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
-install(TARGETS ${PROJECT_NAME}
+add_executable(push_interactive_marker_pose_task src/push_interactive_marker_pose_task.cpp)
+target_link_libraries(push_interactive_marker_pose_task ${PROJECT_NAME} ${catkin_LIBRARIES})
+
+add_executable(push_interactive_marker_gaze_task src/push_interactive_marker_gaze_task.cpp)
+target_link_libraries(push_interactive_marker_gaze_task ${PROJECT_NAME} ${catkin_LIBRARIES})
+
+install(TARGETS ${PROJECT_NAME} push_interactive_marker_pose_task push_interactive_marker_gaze_task
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
