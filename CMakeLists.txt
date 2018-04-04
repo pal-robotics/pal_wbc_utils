@@ -39,6 +39,9 @@ target_link_libraries(push_interactive_marker_pose_task ${PROJECT_NAME} ${catkin
 add_executable(push_interactive_marker_gaze_task src/push_interactive_marker_gaze_task.cpp)
 target_link_libraries(push_interactive_marker_gaze_task ${PROJECT_NAME} ${catkin_LIBRARIES})
 
+add_executable(push_torso_height_ref src/push_torso_height_ref.cpp)
+target_link_libraries(push_torso_height_ref ${PROJECT_NAME} ${catkin_LIBRARIES})
+
 install(TARGETS ${PROJECT_NAME} push_interactive_marker_pose_task push_interactive_marker_gaze_task
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
