@@ -7,6 +7,7 @@ set(CATKIN_COMPONENTS    roscpp
   backward_ros
   pal_wbc_msgs
   pal_ros_utils
+  wbc_tasks
   property_bag)
 
 find_package(catkin REQUIRED COMPONENTS ${CATKIN_COMPONENTS})
