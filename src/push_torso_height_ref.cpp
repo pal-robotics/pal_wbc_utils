@@ -14,10 +14,10 @@ int main(int argc, char** argv)
   nh.param<std::string>("link_name", link_name, "torso_1_link");
 
   std::string base_frame;
-  nh.param<std::string>("base_frame", base_frame, "base_footprint");
+  nh.param<std::string>("base_frame", base_frame, "odom");
 
   double reference_height;
-  nh.param<double>("reference_height", reference_height, 1.08);
+  nh.param<double>("reference_height", reference_height, 0.0);
 
   std::string previous_task_id;
   nh.param<std::string>("before_task_id", previous_task_id, "default_reference");
@@ -29,6 +29,7 @@ int main(int argc, char** argv)
   properties.addProperty("taskType", std::string("pal_wbc/GoToPositionMetaTask"));
   properties.addProperty("task_id", task_id);
   properties.addProperty("tip_name", link_name);
+  properties.addProperty("damping", 1.0);
   std::vector<int> coordinates = { pal_wbc::TaskAbstract::Z };
   properties.addProperty("coordinates", coordinates);
   geometry_msgs::PointStamped target_position;
@@ -38,6 +39,7 @@ int main(int argc, char** argv)
   target_position.point.y = 0.0;
   target_position.point.z = reference_height;
   properties.addProperty("target_position", target_position);
+  properties.addProperty("p_pos_gain", 5.0);
 
   srv_helper.pushTask(properties, "task_id", order, previous_task_id);
 
