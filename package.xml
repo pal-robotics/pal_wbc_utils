@@ -24,6 +24,7 @@
   <depend>pal_ros_utils</depend>
   <depend>pal_wbc_msgs</depend>
   <depend>property_bag</depend>
+  <depend>wbc_tasks</depend>
 
   <exec_depend>reflexxes_adapter</exec_depend>
 
