@@ -17,7 +17,7 @@ int main(int argc, char** argv)
   nh.param<std::string>("base_frame", base_frame, "odom");
 
   double reference_height;
-  nh.param<double>("reference_height", reference_height, 0.0);
+  nh.param<double>("reference_height", reference_height, -0.15);
 
   std::string previous_task_id;
   nh.param<std::string>("before_task_id", previous_task_id, "default_reference");

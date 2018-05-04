@@ -34,8 +34,7 @@ int main(int argc, char **argv)
     task.addProperty("spring", double(150.));
     task.addProperty("filter_gain", double(0.1));
     task.addProperty("ft_name", force_torque);
-    task.removeProperty("damping");
-    task.addProperty("damping", double(60.0));
+    task.addProperty("damper", double(60.));
     task.removeProperty("taskType");
     task.addProperty("taskType",
                      std::string("pal_wbc/GoToLocalVirtualAdmitancePositionMetaTask"));
