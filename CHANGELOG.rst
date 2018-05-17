@@ -2,6 +2,22 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'relative_task' into 'master'
+  Relative task
+  See merge request control/pal_wbc_utils!7
+* Add push relative task
+* Removed defaul reference height
+* Move damping to damper from admitance tasks
+* Merge branch 'torso_ref' into 'master'
+  Add torso reference
+  See merge request control/pal_wbc_utils!5
+* Tune params for task push torso height
+* Add wbc_tasks dependency
+* Add torso reference
+* Contributors: Adria Roig, Hilario Tome
+
 0.0.2 (2018-03-19)
 ------------------
 * Merge branch 'wbc-documentation' into 'master'
