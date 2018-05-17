@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2018-05-17)
+------------------
 * Merge branch 'relative_task' into 'master'
   Relative task
   See merge request control/pal_wbc_utils!7
