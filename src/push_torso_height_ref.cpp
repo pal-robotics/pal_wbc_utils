@@ -30,7 +30,9 @@ int main(int argc, char** argv)
   properties.addProperty("task_id", task_id);
   properties.addProperty("tip_name", link_name);
   properties.addProperty("damping", 1.0);
-  std::vector<int> coordinates = { pal_wbc::TaskAbstract::Z };
+
+  pal_wbc::coord_t c = pal_wbc::coord_t::Z;
+  std::vector<int> coordinates = { c._to_integral() };
   properties.addProperty("coordinates", coordinates);
   geometry_msgs::PointStamped target_position;
   target_position.header.stamp = ros::Time::now();

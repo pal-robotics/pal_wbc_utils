@@ -43,10 +43,10 @@ public:
 
   bool popTask(const std::string &task_id);
 
-  bool pushPopTask(const property_bag::PropertyBag &properties, const std::string &push_task_id,
-                   const pal_wbc_msgs::Order::_order_type &order,
-                   const std::string &push_respect_task_id,
-                   const std::string &pop_task_id);
+//  bool pushPopTask(const property_bag::PropertyBag &properties, const std::string &push_task_id,
+//                   const pal_wbc_msgs::Order::_order_type &order,
+//                   const std::string &push_respect_task_id,
+//                   const std::string &pop_task_id);
 
   pal_wbc_msgs::TaskError getTaskError(const std::string &task_id);
 
@@ -70,7 +70,7 @@ public:
   ros::NodeHandle nh_;
   ros::ServiceClient pop_task_srv_;
   ros::ServiceClient push_task_srv_;
-  ros::ServiceClient push_pop_task_srv_;
+//  ros::ServiceClient push_pop_task_srv_;
   ros::ServiceClient get_task_error_srv_;
   ros::ServiceClient stack_description_srv_;
   std::string ns_;

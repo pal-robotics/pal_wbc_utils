@@ -25,7 +25,10 @@ int main(int argc, char **argv)
   gaze_task.addProperty("reference_type", reference_type);
   gaze_task.addProperty("camera_frame", camera_frame);
 
-  srv_helper.pushTask(gaze_task, "gaze_task", order, previous_task_id);
+  if (!srv_helper.pushTask(gaze_task, "gaze_task", order, previous_task_id))
+  {
+      ROS_ERROR_STREAM("problem pusing gaze task");
+  }
 
   return (0);
 }
