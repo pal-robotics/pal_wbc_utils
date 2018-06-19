@@ -1,0 +1,32 @@
+<library path="lib/libcommon_stacks">
+
+  <class
+      name="common_stacks_dynamic_joint_space_hold_position"
+      type="common_stacks::dynamic::joint_space_hold_position"
+      base_class_type="pal_wbc::StackConfigurationDynamic">
+    <description>
+      WBC dynamic stack plugin for tor
+    </description>
+  </class>
+
+  <class
+      name="common_stacks_dynamic_joint_space_spline"
+      type="common_stacks::dynamic::joint_space_spline"
+      base_class_type="pal_wbc::StackConfigurationDynamic">
+    <description>
+      WBC dynamic stack plugin for tor
+    </description>
+  </class>
+
+  <class
+      name="common_stacks_dynamic_task_space_topic"
+      type="common_stacks::dynamic::task_space_topic"
+      base_class_type="pal_wbc::StackConfigurationDynamic">
+    <description>
+      WBC dynamic stack plugin for tor
+    </description>
+  </class>
+
+</library>
+
+

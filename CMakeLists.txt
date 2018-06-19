@@ -1,14 +1,18 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(pal_wbc_utils)
 
-set(CATKIN_COMPONENTS    roscpp
+set(CATKIN_COMPONENTS
+  roscpp
   pal_utils
   math_utils
   backward_ros
-  pal_wbc_msgs
   pal_ros_utils
   wbc_tasks
-  property_bag)
+  pluginlib
+  property_bag
+  pal_wbc_msgs
+  pal_wbc_controller
+  pal_physics_utils)
 
 find_package(catkin REQUIRED COMPONENTS ${CATKIN_COMPONENTS})
 
@@ -27,7 +31,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 include_directories(include)
 include_directories(
-    SYSTEM
+  SYSTEM
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -47,6 +51,22 @@ add_executable(push_interactive_marker_relative_task src/push_interactive_marker
 target_link_libraries(push_interactive_marker_relative_task ${PROJECT_NAME} ${catkin_LIBRARIES})
 
 
+add_library(common_stacks
+    src/common_stacks/dynamic/joint_space_hold_position.cpp
+    src/common_stacks/dynamic/joint_space_spline.cpp
+    src/common_stacks/dynamic/task_space_topic.cpp
+)
+target_link_libraries(common_stacks ${catkin_LIBRARIES})
+
+
+### Install ###
+
+install(TARGETS common_stacks
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 install(TARGETS ${PROJECT_NAME}
     push_interactive_marker_pose_task
     push_interactive_marker_gaze_task
@@ -62,6 +82,11 @@ install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h"
 )
+
+
+install(FILES common_stacks_wbc_plugins.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
 
 #############
 ## Testing ##

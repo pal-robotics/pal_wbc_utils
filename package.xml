@@ -25,9 +25,13 @@
   <depend>pal_wbc_msgs</depend>
   <depend>property_bag</depend>
   <depend>wbc_tasks</depend>
+  <depend>pal_wbc_controller</depend>
+  <depend>pluginlib</depend>
+  <depend>pal_physics_utils</depend>
 
   <exec_depend>reflexxes_adapter</exec_depend>
 
   <export>
+    <pal_wbc_controller plugin="${prefix}/common_stacks_wbc_plugins.xml" />
   </export>
 </package>
