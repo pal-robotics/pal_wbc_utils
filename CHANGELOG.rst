@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.4 (2018-06-21)
+------------------
 * Merge branch 'as_common_stacks' into 'master'
   Added common stacks
   See merge request control/pal_wbc_utils!9
