@@ -19,8 +19,8 @@
   </class>
 
   <class
-      name="common_stacks_dynamic_task_space_topic"
-      type="common_stacks::dynamic::task_space_topic"
+      name="common_stacks_dynamic_task_space"
+      type="common_stacks::dynamic::task_space"
       base_class_type="pal_wbc::StackConfigurationDynamic">
     <description>
       WBC dynamic stack plugin for tor

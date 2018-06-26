@@ -50,7 +50,7 @@ namespace common_stacks
 {
 namespace dynamic
 {
-class task_space_topic : public StackConfigurationDynamic
+class task_space : public StackConfigurationDynamic
 {
   void setupStack(StackOfTasksDynamicPtr stack, ros::NodeHandle &nh)
   {
@@ -101,23 +101,58 @@ class task_space_topic : public StackConfigurationDynamic
     PAL_ASSERT_PERSIST(goals.topic_goals_.tags_.size() + goals.interactive_goals_.tags_.size() > 0,
                        "At least one topic goal must be specified.");
 
+    const double p_gain = 300;
+    const double d_gain = 0;
+    bool critically_damped = true;
+
     /// @todo AS: it is unsafe to use unsynced link ids.
     for (const auto &tag : goals.topic_goals_.tags_)
     {
-      GoToPositionDynamicMetaTaskPtr go_to_position(new GoToPositionDynamicMetaTask(
-          *stack.get(), tag.link_id_.name_, "ref_pose_minjerk_topic", tag.local_position_,
-          nh, 100, 0, true));
-      objectiveTasks.push_back(
-          { std::string("go_to_position_") + tag.link_id_.name_, go_to_position });
+      switch (tag.type_)
+      {
+        case pal::rbcomposite::TagLink::Type::POSITION:
+        {
+          GoToPositionDynamicMetaTaskPtr go_to_position(new GoToPositionDynamicMetaTask(
+              *stack.get(), tag.link_id_.name_, "ref_pose_minjerk_topic",
+              tag.local_position_, nh, p_gain, d_gain, critically_damped));
+          objectiveTasks.push_back(
+              { std::string("go_to_position_") + tag.link_id_.name_, go_to_position });
+        }
+        break;
+
+        default:
+          PAL_THROW("Topic tag type not supported");
+      }
     }
     for (const auto &tag : goals.interactive_goals_.tags_)
     {
-      GoToPositionDynamicMetaTaskPtr go_to_position(new GoToPositionDynamicMetaTask(
-          *stack.get(), tag.link_id_.name_, "interactive_marker", tag.local_position_, nh,
-          100, 0, true));
+      switch (tag.type_)
+      {
+        case pal::rbcomposite::TagLink::Type::POSITION:
+        {
+          GoToPositionDynamicMetaTaskPtr go_to_position(new GoToPositionDynamicMetaTask(
+              *stack.get(), tag.link_id_.name_, "interactive_marker", tag.local_position_,
+              nh, p_gain, d_gain, critically_damped));
+          objectiveTasks.push_back(
+              { std::string("go_to_position_interactive_") + tag.link_id_.name_, go_to_position });
+        }
+        break;
 
-      objectiveTasks.push_back(
-          { std::string("go_to_position_interactive_") + tag.link_id_.name_, go_to_position });
+
+        case pal::rbcomposite::TagLink::Type::COMPLETE:
+        {
+          GoToPoseDynamicMetaTaskPtr go_to_pose(new GoToPoseDynamicMetaTask(
+              *stack.get(), tag.link_id_.name_, tag.local_position_, "interactive_marker",
+              nh, p_gain, p_gain, d_gain, d_gain, critically_damped));
+
+          objectiveTasks.push_back(
+              { std::string("go_to_pose_interactive_") + tag.link_id_.name_, go_to_pose });
+        }
+        break;
+
+        default:
+          PAL_THROW("Interactive tag type not supported");
+      }
     }
 
 
@@ -141,5 +176,5 @@ class task_space_topic : public StackConfigurationDynamic
 }
 }
 
-PLUGINLIB_EXPORT_CLASS(common_stacks::dynamic::task_space_topic,
+PLUGINLIB_EXPORT_CLASS(common_stacks::dynamic::task_space,
                        pal_wbc::StackConfigurationDynamic);
