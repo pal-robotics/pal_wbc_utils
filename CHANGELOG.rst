@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.5 (2018-06-26)
+------------------
 * Merge branch 'as_devel' into 'master'
   task space stack: gains, renaming, orientation control
   See merge request control/pal_wbc_utils!10
