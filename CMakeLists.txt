@@ -54,7 +54,7 @@ target_link_libraries(push_interactive_marker_relative_task ${PROJECT_NAME} ${ca
 add_library(common_stacks
     src/common_stacks/dynamic/joint_space_hold_position.cpp
     src/common_stacks/dynamic/joint_space_spline.cpp
-    src/common_stacks/dynamic/task_space_topic.cpp
+    src/common_stacks/dynamic/task_space.cpp
 )
 target_link_libraries(common_stacks ${catkin_LIBRARIES})
 
