@@ -49,12 +49,12 @@ class joint_space_hold_position : public StackConfigurationDynamic
     */
 
     TorqueLimitDynamicAllJointsMetaTaskPtr torque_limits_task(new TorqueLimitDynamicAllJointsMetaTask(
-        *stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
-    constraintTasks.push_back({ "torque_limits", torque_limits_task });
+        "torque_limits", *stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
+    constraintTasks.push_back(torque_limits_task);
 
     GenericMetaTaskPtr constraintMetatask(
-        new GenericMetaTask(nh, stack.get(), constraintTasks, stack->getStateSize()));
-    stack->pushTask("constraints", constraintMetatask);
+        new GenericMetaTask(nh, stack.get(), constraintTasks, "constraints"));
+    stack->pushTask(constraintMetatask);
 
     std::vector<std::string> joint_names = stack->getJointNames();
     Eigen::VectorXd reference_posture;
@@ -63,22 +63,22 @@ class joint_space_hold_position : public StackConfigurationDynamic
 
     // vector_dynamic_reconfigure
     ReferenceDynamicPostureTaskMetaTaskPtr reference_task(new ReferenceDynamicPostureTaskMetaTask(
-        *stack.get(), joint_names, "vector_min_jerk_dynamic_reconfigure",
+        "reference_joint", *stack.get(), joint_names, "vector_min_jerk_dynamic_reconfigure",
         reference_posture, 200, nh));
     reference_task->setWeight(1);
 
     TorqueDampingDynamicTaskAllJointsMetaTaskPtr joint_torque_regularization(
-        new TorqueDampingDynamicTaskAllJointsMetaTask(*stack.get(), stack->getJointNames(), nh));
+        new TorqueDampingDynamicTaskAllJointsMetaTask("torque_regularization", *stack.get(), stack->getJointNames(), nh));
     joint_torque_regularization->setWeight(1e-4);
 
     task_container_vector objectiveTasks;
-    objectiveTasks.push_back({ "reference_joint", reference_task });
-    objectiveTasks.push_back({ "torque_regularization", joint_torque_regularization });
+    objectiveTasks.push_back(reference_task);
+    objectiveTasks.push_back(joint_torque_regularization);
 
 
     GenericMetaTaskPtr objectiveMetatask(
-        new GenericMetaTask(nh, stack.get(), objectiveTasks, stack->getStateSize()));
-    stack->pushTask("objectives", objectiveMetatask);
+        new GenericMetaTask(nh, stack.get(), objectiveTasks, "objectives"));
+    stack->pushTask(objectiveMetatask);
   }
 };
 }
