@@ -49,7 +49,7 @@ class joint_space_spline : public StackConfigurationDynamic
         constraintTasks.push_back(joint_position_limit_task);
     */
     TorqueLimitDynamicAllJointsMetaTaskPtr torque_limits_task(new TorqueLimitDynamicAllJointsMetaTask(
-        "torque_limits", *stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
+        "torque_limits", stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
     constraintTasks.push_back(torque_limits_task);
 
 
@@ -57,21 +57,20 @@ class joint_space_spline : public StackConfigurationDynamic
         new GenericMetaTask(nh, stack.get(), constraintTasks, "constraints"));
     stack->pushTask(constraintMetatask);
 
-
     task_container_vector objectiveTasks;
-
 
     pal_robot_tools::VectorJointTrajectoryActionSplineReferencePtr reference =
         boost::make_shared<pal_robot_tools::VectorJointTrajectoryActionSplineReference>(
             nh, "name", stack->getJointNames());
 
-    JointReferenceDynamicPtr reference_task(
-        new JointReferenceDynamic("reference_joint", nh, *stack.get(), stack->getJointNames(), reference, 200));
+    JointReferenceDynamicPtr reference_task(new JointReferenceDynamic(
+        "reference_joint", nh, *stack.get(), stack->getJointNames(), reference, 200));
     reference_task->setWeight(1);
     objectiveTasks.push_back(reference_task);
 
     TorqueDampingDynamicTaskAllJointsMetaTaskPtr joint_torque_regularization(
-        new TorqueDampingDynamicTaskAllJointsMetaTask("torque_regularization", *stack.get(), stack->getJointNames(), nh));
+        new TorqueDampingDynamicTaskAllJointsMetaTask("torque_regularization", stack.get(),
+                                                      stack->getJointNames(), nh));
     joint_torque_regularization->setWeight(1e-4);
 
     objectiveTasks.push_back(joint_torque_regularization);

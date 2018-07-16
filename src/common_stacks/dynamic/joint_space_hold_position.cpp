@@ -49,7 +49,7 @@ class joint_space_hold_position : public StackConfigurationDynamic
     */
 
     TorqueLimitDynamicAllJointsMetaTaskPtr torque_limits_task(new TorqueLimitDynamicAllJointsMetaTask(
-        "torque_limits", *stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
+        "torque_limits", stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
     constraintTasks.push_back(torque_limits_task);
 
     GenericMetaTaskPtr constraintMetatask(
@@ -63,12 +63,13 @@ class joint_space_hold_position : public StackConfigurationDynamic
 
     // vector_dynamic_reconfigure
     ReferenceDynamicPostureTaskMetaTaskPtr reference_task(new ReferenceDynamicPostureTaskMetaTask(
-        "reference_joint", *stack.get(), joint_names, "vector_min_jerk_dynamic_reconfigure",
-        reference_posture, 200, nh));
+        "reference_joint", stack.get(), joint_names,
+        "vector_min_jerk_dynamic_reconfigure", reference_posture, 200, nh));
     reference_task->setWeight(1);
 
     TorqueDampingDynamicTaskAllJointsMetaTaskPtr joint_torque_regularization(
-        new TorqueDampingDynamicTaskAllJointsMetaTask("torque_regularization", *stack.get(), stack->getJointNames(), nh));
+        new TorqueDampingDynamicTaskAllJointsMetaTask("torque_regularization", stack.get(),
+                                                      stack->getJointNames(), nh));
     joint_torque_regularization->setWeight(1e-4);
 
     task_container_vector objectiveTasks;

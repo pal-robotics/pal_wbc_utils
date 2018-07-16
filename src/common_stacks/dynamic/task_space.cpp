@@ -64,7 +64,7 @@ class task_space : public StackConfigurationDynamic
 
     //Joint limit task
     JointPositionLimitDynamicAllJointsMetaTaskPtr joint_position_limit_task(
-          new JointPositionLimitDynamicAllJointsMetaTask(*stack.get(),
+          new JointPositionLimitDynamicAllJointsMetaTask(stack.get(),
                                                          joint_pos_min_override,
                                                          joint_pos_max_override,
                                                          stack->getJointVelocityLimitMin(),
@@ -75,15 +75,15 @@ class task_space : public StackConfigurationDynamic
     constraintTasks.push_back(joint_position_limit_task);
     */
     TorqueLimitDynamicAllJointsMetaTaskPtr torque_limits_task(new TorqueLimitDynamicAllJointsMetaTask(
-        "torque_limits", *stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
+        "torque_limits", stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
     constraintTasks.push_back(torque_limits_task);
 
     std::vector<pal_wbc::ContactDescription> contacts = stack->getContactForceDescriptions();
     for (const pal_wbc::ContactDescription &contact : contacts)
     {
       double mu = 0.0;
-      FrictionConstratintDynamicMetaTaskPtr friction_constraint(
-          new FrictionConstratintDynamicMetaTask("contact_friction", *stack.get(), mu, contact.first, nh));
+      FrictionConstratintDynamicMetaTaskPtr friction_constraint(new FrictionConstratintDynamicMetaTask(
+          "contact_friction", stack.get(), mu, contact.first, nh));
       constraintTasks.push_back(friction_constraint);
     }
 
@@ -113,8 +113,9 @@ class task_space : public StackConfigurationDynamic
         case pal::rbcomposite::TagLink::Type::POSITION:
         {
           GoToPositionDynamicMetaTaskPtr go_to_position(new GoToPositionDynamicMetaTask(
-              std::string("go_to_position_") + tag.link_id_.name_, *stack.get(), tag.link_id_.name_, "ref_pose_minjerk_topic",
-              tag.local_position_, nh, p_gain, d_gain, critically_damped));
+              std::string("go_to_position_") + tag.link_id_.name_, stack.get(),
+              tag.link_id_.name_, "ref_pose_minjerk_topic", tag.local_position_, nh,
+              p_gain, d_gain, critically_damped));
           objectiveTasks.push_back(go_to_position);
         }
         break;
@@ -130,7 +131,8 @@ class task_space : public StackConfigurationDynamic
         case pal::rbcomposite::TagLink::Type::POSITION:
         {
           GoToPositionDynamicMetaTaskPtr go_to_position(new GoToPositionDynamicMetaTask(
-              std::string("go_to_position_interactive_") + tag.link_id_.name_, *stack.get(), tag.link_id_.name_, "interactive_marker", tag.local_position_,
+              std::string("go_to_position_interactive_") + tag.link_id_.name_,
+              stack.get(), tag.link_id_.name_, "interactive_marker", tag.local_position_,
               nh, p_gain, d_gain, critically_damped));
           objectiveTasks.push_back(go_to_position);
         }
@@ -140,8 +142,9 @@ class task_space : public StackConfigurationDynamic
         case pal::rbcomposite::TagLink::Type::COMPLETE:
         {
           GoToPoseDynamicMetaTaskPtr go_to_pose(new GoToPoseDynamicMetaTask(
-              std::string("go_to_pose_interactive_") + tag.link_id_.name_, *stack.get(), tag.link_id_.name_, tag.local_position_, "interactive_marker",
-              nh, p_gain, p_gain, d_gain, d_gain, critically_damped));
+              std::string("go_to_pose_interactive_") + tag.link_id_.name_, stack.get(),
+              tag.link_id_.name_, tag.local_position_, "interactive_marker", nh, p_gain,
+              p_gain, d_gain, d_gain, critically_damped));
 
           objectiveTasks.push_back(go_to_pose);
         }
@@ -160,7 +163,8 @@ class task_space : public StackConfigurationDynamic
     // reference_posture.setZero(stack->getNumberDofJointState());
 
     ReferenceDynamicPostureTaskMetaTaskPtr reference_task(new ReferenceDynamicPostureTaskMetaTask(
-        "reference", *stack.get(), joint_names, "vector_dynamic_reconfigure", reference_posture, 36, nh));
+        "reference", stack.get(), joint_names, "vector_dynamic_reconfigure",
+        reference_posture, 36, nh));
     reference_task->setWeight(1e-2);
 
     objectiveTasks.push_back(reference_task);
@@ -173,5 +177,4 @@ class task_space : public StackConfigurationDynamic
 }
 }
 
-PLUGINLIB_EXPORT_CLASS(common_stacks::dynamic::task_space,
-                       pal_wbc::StackConfigurationDynamic);
+PLUGINLIB_EXPORT_CLASS(common_stacks::dynamic::task_space, pal_wbc::StackConfigurationDynamic);
