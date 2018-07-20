@@ -40,7 +40,10 @@ int main(int argc, char **argv)
                      std::string("pal_wbc/GoToLocalVirtualAdmitancePositionMetaTask"));
   }
 
-  srv_helper.pushTask(task, std::string("position_" + tip_name), order, previous_task_id);
+  if (!srv_helper.pushTask(task, std::string("position_" + tip_name), order, previous_task_id))
+  {
+    ROS_ERROR_STREAM("problem pushing position task");
+  }
 
   task.updateProperty("taskType", std::string("pal_wbc/GoToOrientationMetaTask"));
   task.updateProperty("task_id", std::string("orientation_" + tip_name));
@@ -52,8 +55,11 @@ int main(int argc, char **argv)
                      std::string("pal_wbc/GoToLocalVirtualAdmitanceOrientationMetaTask"));
   }
 
-  srv_helper.pushTask(task, std::string("orientation_" + tip_name), order,
-                      std::string("position_" + tip_name));
+  if (!srv_helper.pushTask(task, std::string("orientation_" + tip_name), order,
+                           std::string("position_" + tip_name)))
+  {
+    ROS_ERROR_STREAM("problem pushing orientation task");
+  }
 
   return (0);
 }

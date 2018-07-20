@@ -74,15 +74,13 @@ int main(int argc, char **argv)
   task.addProperty("reference_link", tip_name);
   task.addProperty("target_position", target_position);
 
-  order = pal_wbc_msgs::Order::Before;
+  order = pal_wbc_msgs::Order::After;
 
   srv_helper.pushTask(task, std::string("relative_position_" + constrained_link), order, std::string("position_" + tip_name));
 
   task.updateProperty("taskType", std::string("pal_wbc/GoToRelativeOrientationMetaTask"));
   task.updateProperty("task_id", std::string("relative_orientation_" + constrained_link));
   task.addProperty("target_orientation", target_orientation);
-
-  order = pal_wbc_msgs::Order::After;
 
   srv_helper.pushTask(task, std::string("relative_orientation_" + constrained_link), order, std::string("relative_position_" + constrained_link));
 
