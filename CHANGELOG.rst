@@ -2,6 +2,17 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'blending_rebased' into 'master'
+  Blending rebased
+  See merge request control/pal_wbc_utils!11
+* more refactoring
+* Change order stack when pushing relative task
+* Fix compilation issues after rebase
+* support for blending
+* Contributors: Adrià Roig, Hilario Tome
+
 0.0.5 (2018-06-26)
 ------------------
 * Merge branch 'as_devel' into 'master'
