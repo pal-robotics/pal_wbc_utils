@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.6 (2018-07-20)
+------------------
 * Merge branch 'blending_rebased' into 'master'
   Blending rebased
   See merge request control/pal_wbc_utils!11
