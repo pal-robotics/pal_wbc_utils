@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'wbc_grasp_demo' into 'master'
+  Add namespace param
+  See merge request control/pal_wbc_utils!12
+* Add namespace param
+* Contributors: Adrià Roig, Hilario Tome
+
 0.0.6 (2018-07-20)
 ------------------
 * Merge branch 'blending_rebased' into 'master'
