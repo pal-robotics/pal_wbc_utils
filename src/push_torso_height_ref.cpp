@@ -8,8 +8,6 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "push_torso_height_ref");
   ros::NodeHandle nh("~");
 
-  pal::WBCServiceHelper srv_helper(nh);
-
   std::string link_name;
   nh.param<std::string>("link_name", link_name, "torso_1_link");
 
@@ -21,6 +19,11 @@ int main(int argc, char** argv)
 
   std::string previous_task_id;
   nh.param<std::string>("before_task_id", previous_task_id, "default_reference");
+
+  std::string ns;
+  nh.param<std::string>("ns", ns, "/whole_body_kinematic_controller");
+
+  pal::WBCServiceHelper srv_helper(nh, ns);
 
   pal_wbc_msgs::Order::_order_type order = pal_wbc_msgs::Order::Before;
 

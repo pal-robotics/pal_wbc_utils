@@ -5,8 +5,6 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "push_pose_task");
   ros::NodeHandle nh("~");
 
-  pal::WBCServiceHelper srv_helper(nh);
-
   std::string reference_type;
   nh.param<std::string>("source_data", reference_type, "interactive_marker_reflexx_typeII");
 
@@ -18,6 +16,11 @@ int main(int argc, char **argv)
 
   std::string force_torque;
   nh.param<std::string>("admitance_ft", force_torque, "");
+
+  std::string ns;
+  nh.param<std::string>("ns", ns, "/whole_body_kinematic_controller");
+
+  pal::WBCServiceHelper srv_helper(nh, ns);
 
   property_bag::PropertyBag task;
   pal_wbc_msgs::Order::_order_type order = pal_wbc_msgs::Order::After;
