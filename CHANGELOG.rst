@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'tiago_admitance' into 'master'
+  Modify pose_task to accept a given pose by rosparam
+  See merge request control/pal_wbc_utils!14
+* Modify pose_task to accept a given pose by rosparam
+* Contributors: Adrià Roig, Victor Lopez
+
 0.0.7 (2018-08-01)
 ------------------
 * Merge branch 'wbc_grasp_demo' into 'master'
