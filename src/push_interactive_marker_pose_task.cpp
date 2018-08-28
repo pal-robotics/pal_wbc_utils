@@ -1,4 +1,7 @@
 #include <pal_wbc_utils/pal_wbc_utils.h>
+#include <geometry_msgs/PointStamped.h>
+#include <geometry_msgs/QuaternionStamped.h>
+#include <pal_ros_utils/ParamUtils.h>
 
 int main(int argc, char **argv)
 {
@@ -7,6 +10,23 @@ int main(int argc, char **argv)
 
   std::string reference_type;
   nh.param<std::string>("source_data", reference_type, "interactive_marker_reflexx_typeII");
+
+  boost::optional<geometry_msgs::PointStamped> target_position;
+  boost::optional<geometry_msgs::QuaternionStamped> target_orientation;
+
+  if(reference_type == "pointer_reflexx_typeII" || reference_type == "pointer")
+  {
+    std::string reference_frame;
+    nh.param<std::string>("reference_frame", reference_frame, "base_link");
+    geometry_msgs::PointStamped point;
+    point.point = pal::getParamPoint(nh, "target_position");
+    point.header.frame_id = reference_frame;
+    geometry_msgs::QuaternionStamped quaternion;
+    quaternion.quaternion = pal::getParamQuaternion(nh, "target_orientation");
+    quaternion.header.frame_id = reference_frame;
+    target_position = point;
+    target_orientation = quaternion;
+  }
 
   std::string tip_name;
   nh.param<std::string>("tip_name", tip_name, "arm_tool_link");
@@ -41,6 +61,11 @@ int main(int argc, char **argv)
     task.removeProperty("taskType");
     task.addProperty("taskType",
                      std::string("pal_wbc/GoToLocalVirtualAdmitancePositionMetaTask"));
+  }
+  if(target_position && target_orientation)
+  {
+    task.addProperty("target_position", target_position.get());
+    task.addProperty("target_orientation", target_orientation.get());
   }
 
   if (!srv_helper.pushTask(task, std::string("position_" + tip_name), order, previous_task_id))
