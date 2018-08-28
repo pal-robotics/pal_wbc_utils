@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.8 (2018-08-28)
+------------------
 * Merge branch 'tiago_admitance' into 'master'
   Modify pose_task to accept a given pose by rosparam
   See merge request control/pal_wbc_utils!14
