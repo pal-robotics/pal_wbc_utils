@@ -40,6 +40,9 @@ int main(int argc, char **argv)
   std::string ns;
   nh.param<std::string>("ns", ns, "/whole_body_kinematic_controller");
 
+  double damping;
+  nh.param<double>("damping", damping, 0.2);
+
   pal::WBCServiceHelper srv_helper(nh, ns);
 
   property_bag::PropertyBag task;
@@ -49,7 +52,7 @@ int main(int argc, char **argv)
   task.addProperty("task_id", std::string("position_" + tip_name));
   task.addProperty("signal_reference", reference_type);
   task.addProperty("tip_name", tip_name);
-  task.addProperty("damping", 0.2);
+  task.addProperty("damping", damping);
 
   if (!force_torque.empty())
   {
