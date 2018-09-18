@@ -49,6 +49,9 @@ public:
 //                   const std::string &pop_task_id);
 
   pal_wbc_msgs::TaskError getTaskError(const std::string &task_id);
+  
+  
+  bool taskExists(const std::string &task_id);
 
   bool check_if_services_are_ready(const ros::Duration &timeout);
 

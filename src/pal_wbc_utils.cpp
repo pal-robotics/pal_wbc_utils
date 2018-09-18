@@ -174,6 +174,25 @@ pal_wbc_msgs::TaskError WBCServiceHelper::getTaskError(const std::string &task_i
   return srv.response.taskError;
 }
 
+bool WBCServiceHelper::taskExists(const std::string &task_id)
+{
+  if (!check_if_services_are_ready(ros::Duration(10.0)))
+    return false;
+
+  pal_wbc_msgs::GetStackDescription statusSrv;
+  if (stack_description_srv_.call(statusSrv))
+  {
+    for (auto task : statusSrv.response.tasks)
+    {
+      if (task.name == task_id)
+        return true;
+    }
+    return false;
+  }
+  ROS_ERROR("Failed to call service ");
+  return false;
+}
+
 bool WBCServiceHelper::printStackDescription()
 {
   if (!check_if_services_are_ready(ros::Duration(10.0)))
