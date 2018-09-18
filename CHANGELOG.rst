@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.9 (2018-09-18)
+------------------
 * Merge branch 'add-task-exists' into 'master'
   Add task exists
   See merge request control/pal_wbc_utils!16
