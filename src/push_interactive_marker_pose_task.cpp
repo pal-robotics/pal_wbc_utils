@@ -43,6 +43,12 @@ int main(int argc, char **argv)
   double damping;
   nh.param<double>("damping", damping, 0.2);
 
+  double position_gain;
+  nh.param<double>("position_gain", position_gain, 1.0);
+
+  double orientation_gain;
+  nh.param<double>("orientation_gain", orientation_gain, 1.0);
+
   pal::WBCServiceHelper srv_helper(nh, ns);
 
   property_bag::PropertyBag task;
@@ -53,6 +59,8 @@ int main(int argc, char **argv)
   task.addProperty("signal_reference", reference_type);
   task.addProperty("tip_name", tip_name);
   task.addProperty("damping", damping);
+  task.addProperty("p_pos_gain", position_gain);
+  task.addProperty("p_orient_gain", orientation_gain);
 
   if (!force_torque.empty())
   {
