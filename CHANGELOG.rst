@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.10 (2018-09-21)
+-------------------
 * Merge branch 'damping_fix' into 'master'
   Add damping in the push pose task as a param
   See merge request control/pal_wbc_utils!15
