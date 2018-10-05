@@ -28,10 +28,12 @@
   <depend>pal_wbc_controller</depend>
   <depend>pluginlib</depend>
   <depend>pal_physics_utils</depend>
+  <doc_depend>doxygen</doc_depend>
 
   <exec_depend>reflexxes_adapter</exec_depend>
 
   <export>
+    <rosdoc config="rosdoc.yaml" />
     <pal_wbc_controller plugin="${prefix}/common_stacks_wbc_plugins.xml" />
   </export>
 </package>

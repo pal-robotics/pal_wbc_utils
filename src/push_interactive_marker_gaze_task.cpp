@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
   property_bag::PropertyBag gaze_task;
   gaze_task.addProperty("taskType",
-                        std::string("pal_wbc/GoToPointRayAngleGazeKinematicMetatask"));
+                        std::string("pal_wbc/GazePointKinematicMetaTask"));
   gaze_task.addProperty("task_id", std::string("gaze_task"));
   gaze_task.addProperty("reference_type", reference_type);
   gaze_task.addProperty("camera_frame", camera_frame);
