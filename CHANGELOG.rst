@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'introspection-data' into 'master'
+  Add gains on the main node
+  See merge request control/pal_wbc_utils!18
+* Add gains on the main node
+* Contributors: Adrià Roig, Victor Lopez
+
 0.0.11 (2018-10-17)
 -------------------
 * Merge branch 'documentation' into 'master'
