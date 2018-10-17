@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.11 (2018-10-17)
+-------------------
 * Merge branch 'documentation' into 'master'
   generate documentation
   See merge request control/pal_wbc_utils!17
