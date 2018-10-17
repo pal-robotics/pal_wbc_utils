@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'documentation' into 'master'
+  generate documentation
+  See merge request control/pal_wbc_utils!17
+* generate documentation
+* Contributors: Adrià Roig, Victor Lopez
+
 0.0.10 (2018-09-21)
 -------------------
 * Merge branch 'damping_fix' into 'master'
