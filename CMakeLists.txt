@@ -12,7 +12,8 @@ set(CATKIN_COMPONENTS
   property_bag
   pal_wbc_msgs
   pal_wbc_controller
-  pal_physics_utils)
+  pal_physics_utils
+  pal_rosdoc)
 
 find_package(catkin REQUIRED COMPONENTS ${CATKIN_COMPONENTS})
 
@@ -60,6 +61,7 @@ target_link_libraries(common_stacks ${catkin_LIBRARIES})
 
 
 ### Install ###
+generate_and_install_pal_rosdoc()
 
 install(TARGETS common_stacks
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

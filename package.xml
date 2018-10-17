@@ -28,6 +28,7 @@
   <depend>pal_wbc_controller</depend>
   <depend>pluginlib</depend>
   <depend>pal_physics_utils</depend>
+  <depend>pal_rosdoc</depend>
   <doc_depend>doxygen</doc_depend>
 
   <exec_depend>reflexxes_adapter</exec_depend>
