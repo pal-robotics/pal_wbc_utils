@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'add-automatic-doc' into 'master'
+  Add automatic doc
+  See merge request control/pal_wbc_utils!19
+* Add automatic doc
+* Contributors: Victor Lopez
+
 0.0.12 (2018-10-17)
 -------------------
 * Merge branch 'introspection-data' into 'master'
