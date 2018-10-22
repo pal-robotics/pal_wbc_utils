@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.13 (2018-10-22)
+-------------------
 * Merge branch 'add-automatic-doc' into 'master'
   Add automatic doc
   See merge request control/pal_wbc_utils!19
