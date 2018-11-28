@@ -12,10 +12,14 @@
 #include <wbc_tasks/torque_limit_dynamic_task.h>
 #include <wbc_tasks/unilateral_forces_dynamic.h>
 #include <wbc_tasks/joint_pos_limit_dynamic_task.h>
+#include <wbc_tasks/dynamic_task_joint_pos_vel_acc_limits.h>
 #include <pluginlib/class_list_macros.h>
 
 #include <wbc_tasks/physics_tools.h>
 #include <pal_physics_utils/rbcomposite/urdf_model.h>
+
+#include "./joint_constraints.h"
+
 
 using namespace pal_wbc;
 
@@ -23,38 +27,20 @@ namespace common_stacks
 {
 namespace dynamic
 {
-class joint_space_hold_position : public StackConfigurationDynamic
+class joint_space_hold_position : public StackConfigurationDynamic, public JointConstraints
 {
   void setupStack(StackOfTasksDynamicPtr stack, ros::NodeHandle &nh)
   {
-    task_container_vector constraintTasks;
-    setUpPhysics(stack, nh, constraintTasks);
+    task_container_vector constraints;
+    setUpPhysics(stack, nh, constraints);
+    setupJointConstraints(stack, nh, constraints);
 
-    /*
-    // Modify the joint limits
-    std::vector<double> joint_pos_min_override = stack->getJointPositionLimitMin();
-    std::vector<double> joint_pos_max_override = stack->getJointPositionLimitMax();
-
-    //Joint limit task
-    JointPositionLimitDynamicAllJointsMetaTaskPtr joint_position_limit_task(
-          new JointPositionLimitDynamicAllJointsMetaTask(*stack.get(),
-                                                         joint_pos_min_override,
-                                                         joint_pos_max_override,
-                                                         stack->getJointVelocityLimitMin(),
-                                                         stack->getJointVelocityLimitMax(),
-                                                         stack->getJointNames(),
-                                                         1.0, true, true, nh));
-
-    constraintTasks.push_back(joint_position_limit_task);
-    */
-
-    TorqueLimitDynamicAllJointsMetaTaskPtr torque_limits_task(new TorqueLimitDynamicAllJointsMetaTask(
-        "torque_limits", stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
-    constraintTasks.push_back(torque_limits_task);
 
     GenericMetaTaskPtr constraintMetatask(
-        new GenericMetaTask(nh, stack.get(), constraintTasks, "constraints"));
+        new GenericMetaTask(nh, stack.get(), constraints, "constraints"));
     stack->pushTask(constraintMetatask);
+
+
 
     std::vector<std::string> joint_names = stack->getJointNames();
     Eigen::VectorXd reference_posture;

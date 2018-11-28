@@ -13,10 +13,14 @@
 #include <wbc_tasks/unilateral_forces_dynamic.h>
 #include <wbc_tasks/joint_pos_limit_dynamic_task.h>
 #include <wbc_tasks/friction_constraint_task.h>
+#include <wbc_tasks/dynamic_task_joint_pos_vel_acc_limits.h>
 #include <pluginlib/class_list_macros.h>
 
 #include <wbc_tasks/physics_tools.h>
 #include <pal_physics_utils/rbcomposite/urdf_model.h>
+
+#include "./joint_constraints.h"
+
 
 namespace
 {
@@ -50,33 +54,14 @@ namespace common_stacks
 {
 namespace dynamic
 {
-class task_space : public StackConfigurationDynamic
+class task_space : public StackConfigurationDynamic, public JointConstraints
 {
   void setupStack(StackOfTasksDynamicPtr stack, ros::NodeHandle &nh)
   {
-    task_container_vector constraintTasks;
-    setUpPhysics(stack, nh, constraintTasks);
+    task_container_vector constraints;
+    setUpPhysics(stack, nh, constraints);
+    setupJointConstraints(stack, nh, constraints);
 
-    /*
-    // Modify the joint limits
-    std::vector<double> joint_pos_min_override = stack->getJointPositionLimitMin();
-    std::vector<double> joint_pos_max_override = stack->getJointPositionLimitMax();
-
-    //Joint limit task
-    JointPositionLimitDynamicAllJointsMetaTaskPtr joint_position_limit_task(
-          new JointPositionLimitDynamicAllJointsMetaTask(stack.get(),
-                                                         joint_pos_min_override,
-                                                         joint_pos_max_override,
-                                                         stack->getJointVelocityLimitMin(),
-                                                         stack->getJointVelocityLimitMax(),
-                                                         stack->getJointNames(),
-                                                         1.0, true, true, nh));
-
-    constraintTasks.push_back(joint_position_limit_task);
-    */
-    TorqueLimitDynamicAllJointsMetaTaskPtr torque_limits_task(new TorqueLimitDynamicAllJointsMetaTask(
-        "torque_limits", stack.get(), stack->getJointTorqueLimits(), stack->getJointNames(), nh));
-    constraintTasks.push_back(torque_limits_task);
 
     std::vector<pal_wbc::ContactDescription> contacts = stack->getContactForceDescriptions();
     for (const pal_wbc::ContactDescription &contact : contacts)
@@ -84,13 +69,12 @@ class task_space : public StackConfigurationDynamic
       double mu = 0.0;
       FrictionConstratintDynamicMetaTaskPtr friction_constraint(new FrictionConstratintDynamicMetaTask(
           "contact_friction", stack.get(), mu, contact.first, nh));
-      constraintTasks.push_back(friction_constraint);
+      constraints.push_back(friction_constraint);
     }
 
     GenericMetaTaskPtr constraintMetatask(
-        new GenericMetaTask(nh, stack.get(), constraintTasks, "constraints"));
+        new GenericMetaTask(nh, stack.get(), constraints, "constraints"));
     stack->pushTask(constraintMetatask);
-
 
 
     task_container_vector objectiveTasks;
