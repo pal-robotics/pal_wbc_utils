@@ -2,6 +2,15 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'as_wbc_joint_limits' into 'master'
+  common stacks: add joint limits.
+  See merge request control/pal_wbc_utils!20
+* common_stacks/dynamic: configurable joint limits parameters
+* common stacks: add joint limits.
+* Contributors: alexandersherikov
+
 0.0.13 (2018-10-22)
 -------------------
 * Merge branch 'add-automatic-doc' into 'master'
