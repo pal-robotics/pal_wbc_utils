@@ -18,35 +18,8 @@
 
 #include <wbc_tasks/physics_tools.h>
 #include <pal_physics_utils/rbcomposite/urdf_model.h>
-
 #include "./joint_constraints.h"
-
-
-namespace
-{
-/// @todo AS: add interactive goals
-class TaskSpaceGoalTags : public ariles::ConfigurableBase
-{
-#define ARILES_SECTION_ID "TaskSpaceGoalTags"
-#define ARILES_ENTRIES                                                                   \
-  ARILES_TYPED_ENTRY_(topic_goals, pal::rbcomposite::TagPointSet)                        \
-  ARILES_TYPED_ENTRY_(interactive_goals, pal::rbcomposite::TagPointSet)
-#include ARILES_INITIALIZE
-
-public:
-  TaskSpaceGoalTags()
-  {
-    setDefaults();
-  }
-
-  void setDefaults()
-  {
-    topic_goals_.setDefaults();
-    interactive_goals_.setDefaults();
-  }
-};
-}
-
+#include <pal_wbc_utils/task_space_goals.h>
 
 using namespace pal_wbc;
 
