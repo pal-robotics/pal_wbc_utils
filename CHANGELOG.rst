@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'task_space_header' into 'master'
+  separated task space goal header
+  See merge request control/pal_wbc_utils!22
+* separated task space goal header
+* Contributors: Hilario Tome
+
 0.0.14 (2018-11-28)
 -------------------
 * Merge branch 'as_wbc_joint_limits' into 'master'
