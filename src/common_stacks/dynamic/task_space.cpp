@@ -55,41 +55,22 @@ class task_space : public StackConfigurationDynamic, public JointConstraints
     TaskSpaceGoalTags goals;
     goals.readConfig<ariles::ros>(nh, "task_space_goals");
 
-    PAL_ASSERT_PERSIST(goals.topic_goals_.tags_.size() + goals.interactive_goals_.tags_.size() > 0,
-                       "At least one topic goal must be specified.");
+    PAL_ASSERT_PERSIST(goals.tags_.size() > 0, "At least one task space goal must be specified.");
 
     const double p_gain = 300;
     const double d_gain = 0;
     bool critically_damped = true;
 
     /// @todo AS: it is unsafe to use unsynced link ids.
-    for (const auto &tag : goals.topic_goals_.tags_)
+    for (const auto &tag : goals.tags_)
     {
       switch (tag.type_)
       {
         case pal::rbcomposite::TagLink::Type::POSITION:
         {
           GoToPositionDynamicMetaTaskPtr go_to_position(new GoToPositionDynamicMetaTask(
-              std::string("go_to_position_") + tag.link_id_.name_, stack.get(),
-              tag.link_id_.name_, "ref_pose_minjerk_topic", tag.local_position_, nh,
-              p_gain, d_gain, critically_damped));
-          objectiveTasks.push_back(go_to_position);
-        }
-        break;
-
-        default:
-          PAL_THROW("Topic tag type not supported");
-      }
-    }
-    for (const auto &tag : goals.interactive_goals_.tags_)
-    {
-      switch (tag.type_)
-      {
-        case pal::rbcomposite::TagLink::Type::POSITION:
-        {
-          GoToPositionDynamicMetaTaskPtr go_to_position(new GoToPositionDynamicMetaTask(
-              std::string("go_to_position_interactive_") + tag.link_id_.name_,
-              stack.get(), tag.link_id_.name_, "interactive_marker", tag.local_position_,
+              std::string("go_to_position_") + tag.reference_type_ + "_" + tag.link_id_.name_,
+              stack.get(), tag.link_id_.name_, tag.reference_type_, tag.local_position_,
               nh, p_gain, d_gain, critically_damped));
           objectiveTasks.push_back(go_to_position);
         }
@@ -98,10 +79,13 @@ class task_space : public StackConfigurationDynamic, public JointConstraints
 
         case pal::rbcomposite::TagLink::Type::COMPLETE:
         {
+          PAL_ASSERT_PERSIST("ref_pose_minjerk_topic" != tag.reference_type_,
+                             "Topic tag type not supported");
+
           GoToPoseDynamicMetaTaskPtr go_to_pose(new GoToPoseDynamicMetaTask(
-              std::string("go_to_pose_interactive_") + tag.link_id_.name_, stack.get(),
-              tag.link_id_.name_, tag.local_position_, "interactive_marker", nh, p_gain,
-              p_gain, d_gain, d_gain, critically_damped));
+              std::string("go_to_pose_") + tag.reference_type_ + "_" + tag.link_id_.name_,
+              stack.get(), tag.link_id_.name_, tag.local_position_, tag.reference_type_,
+              nh, p_gain, p_gain, d_gain, d_gain, critically_damped));
 
           objectiveTasks.push_back(go_to_pose);
         }
