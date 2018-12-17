@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'as_task_space_common_stack_refactoring' into 'master'
+  Refactoring of the common stack for task space control.
+  See merge request control/pal_wbc_utils!23
+* Refactoring of the common stack for task space control.
+* Contributors: alexandersherikov
+
 0.0.15 (2018-12-11)
 -------------------
 * Merge branch 'task_space_header' into 'master'
