@@ -3,25 +3,18 @@
 
 namespace pal_wbc
 {
-/// @todo AS: add interactive goals
-class TaskSpaceGoalTags : public ariles::ConfigurableBase
+class TagTaskSpaceGoal : public pal::rbcomposite::TagPoint
 {
 #define ARILES_SECTION_ID "TaskSpaceGoalTags"
+#define ARILES_AUTO_DEFAULTS
 #define ARILES_ENTRIES                                                                   \
-  ARILES_TYPED_ENTRY_(topic_goals, pal::rbcomposite::TagPointSet)                        \
-  ARILES_TYPED_ENTRY_(interactive_goals, pal::rbcomposite::TagPointSet)
+  ARILES_PARENT(pal::rbcomposite::TagPoint)                                              \
+  ARILES_TYPED_ENTRY_(reference_type, std::string)
+// reference_type: interactive_marker, ref_pose_minjerk_topic,
+// rigid_body_trajectory_action
 #include ARILES_INITIALIZE
-
-public:
-  TaskSpaceGoalTags()
-  {
-    setDefaults();
-  }
-
-  void setDefaults()
-  {
-    topic_goals_.setDefaults();
-    interactive_goals_.setDefaults();
-  }
 };
+
+
+typedef pal::rbcomposite::TagSet<TagTaskSpaceGoal> TaskSpaceGoalTags;
 }
