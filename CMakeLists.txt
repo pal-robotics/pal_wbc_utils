@@ -51,6 +51,9 @@ target_link_libraries(push_torso_height_ref ${PROJECT_NAME} ${catkin_LIBRARIES})
 add_executable(push_interactive_marker_relative_task src/push_interactive_marker_relative_task.cpp)
 target_link_libraries(push_interactive_marker_relative_task ${PROJECT_NAME} ${catkin_LIBRARIES})
 
+add_executable(push_topic_reference_task src/push_topic_reference_task.cpp)
+target_link_libraries(push_topic_reference_task ${PROJECT_NAME} ${catkin_LIBRARIES})
+
 
 add_library(common_stacks
     src/common_stacks/dynamic/joint_space_hold_position.cpp
