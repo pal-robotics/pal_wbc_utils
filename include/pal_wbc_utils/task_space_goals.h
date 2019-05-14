@@ -1,3 +1,11 @@
+/*
+ * Copyright 2019 PAL Robotics SL. All Rights Reserved
+ *
+ * Unauthorized copying of this file, via any medium is strictly prohibited,
+ * unless it was supplied under the terms of a license agreement or
+ * nondisclosure agreement with PAL Robotics SL. In this case it may not be
+ * copied or disclosed except in accordance with the terms of that agreement.
+ */
 #include <ariles/ariles_all.h>
 #include <pal_physics_utils/rbcomposite/urdf_model.h>
 

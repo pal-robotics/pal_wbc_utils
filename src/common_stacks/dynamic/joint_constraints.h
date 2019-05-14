@@ -1,3 +1,11 @@
+/*
+ * Copyright 2019 PAL Robotics SL. All Rights Reserved
+ *
+ * Unauthorized copying of this file, via any medium is strictly prohibited,
+ * unless it was supplied under the terms of a license agreement or
+ * nondisclosure agreement with PAL Robotics SL. In this case it may not be
+ * copied or disclosed except in accordance with the terms of that agreement.
+ */
 #include <pal_wbc_controller/task_abstract.h>
 #include <pal_wbc_controller/stack_of_tasks_dynamic.h>
 #include <pal_wbc_controller/generic_meta_task.h>
