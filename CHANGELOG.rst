@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.17 (2019-05-18)
+-------------------
 * Merge branch 'license-refactor' into 'master'
   Update pal license
   See merge request control/pal_wbc_utils!25
