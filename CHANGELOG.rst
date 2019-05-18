@@ -2,6 +2,18 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'license-refactor' into 'master'
+  Update pal license
+  See merge request control/pal_wbc_utils!25
+* Update PAL licenses
+* Merge branch 'public' into 'master'
+  Add topic reference task + documentation
+  See merge request control/pal_wbc_utils!24
+* Add topic reference task + extend documentation
+* Contributors: Adria Roig, Hilario Tome, Victor Lopez
+
 0.0.16 (2018-12-17)
 -------------------
 * Merge branch 'as_task_space_common_stack_refactoring' into 'master'
