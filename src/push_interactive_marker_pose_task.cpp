@@ -10,6 +10,7 @@
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/QuaternionStamped.h>
 #include <pal_ros_utils/ParamUtils.h>
+#include <boost/optional.hpp>
 
 /*
  *  Node that pushes a Position + Orientation task into the stack
