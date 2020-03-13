@@ -75,8 +75,9 @@ install(TARGETS common_stacks
 install(TARGETS ${PROJECT_NAME}
     push_interactive_marker_pose_task
     push_interactive_marker_gaze_task
-    push_interactive_marker_relative_task
     push_torso_height_ref
+    push_interactive_marker_relative_task
+    push_topic_reference_task
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
