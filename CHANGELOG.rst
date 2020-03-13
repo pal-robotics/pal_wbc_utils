@@ -2,6 +2,11 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add missing install rule
+* Contributors: Victor Lopez
+
 0.0.18 (2019-09-27)
 -------------------
 * Add missing include
