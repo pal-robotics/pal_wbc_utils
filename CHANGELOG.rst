@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'documentation_review' into 'master'
+  Documentation review
+  See merge request control/pal_wbc_utils!27
+* Documentation review
+* Contributors: Adria Roig, narcismiguel
+
 0.0.19 (2020-03-13)
 -------------------
 * Add missing install rule
