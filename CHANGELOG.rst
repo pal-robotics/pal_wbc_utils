@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.20 (2020-07-28)
+-------------------
 * Merge branch 'documentation_review' into 'master'
   Documentation review
   See merge request control/pal_wbc_utils!27
