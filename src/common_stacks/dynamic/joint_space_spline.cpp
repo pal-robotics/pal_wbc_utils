@@ -45,16 +45,17 @@ class joint_space_spline : public StackConfigurationDynamic, public JointConstra
 
     pal_robot_tools::VectorJointTrajectoryActionSplineReferencePtr reference =
         boost::make_shared<pal_robot_tools::VectorJointTrajectoryActionSplineReference>(
-            nh, "name", stack->getJointNames());
+            nh, "name", stack->getWBCModelPtr()->getJointNames());
 
-    JointReferenceDynamicPtr reference_task(new JointReferenceDynamic(
-        "reference_joint", nh, *stack.get(), stack->getJointNames(), reference, 200));
+    JointReferenceDynamicPtr reference_task(
+        new JointReferenceDynamic("reference_joint", nh, *stack.get(),
+                                  stack->getWBCModelPtr()->getJointNames(), reference, 200));
     reference_task->setWeight(1);
     objectiveTasks.push_back(reference_task);
 
     TorqueDampingDynamicTaskAllJointsMetaTaskPtr joint_torque_regularization(
-        new TorqueDampingDynamicTaskAllJointsMetaTask("torque_regularization", stack.get(),
-                                                      stack->getJointNames(), nh));
+        new TorqueDampingDynamicTaskAllJointsMetaTask(
+            "torque_regularization", stack.get(), stack->getWBCModelPtr()->getJointNames(), nh));
     joint_torque_regularization->setWeight(1e-4);
 
     objectiveTasks.push_back(joint_torque_regularization);

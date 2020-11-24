@@ -36,7 +36,8 @@ class task_space : public StackConfigurationDynamic, public JointConstraints
     setupJointConstraints(stack, nh, constraints);
 
 
-    std::vector<pal_wbc::ContactDescription> contacts = stack->getContactForceDescriptions();
+    std::vector<pal_wbc::ContactDescription> contacts =
+        stack->getWBCModelPtr()->getContactForceDescriptions();
     for (const pal_wbc::ContactDescription &contact : contacts)
     {
       double mu = 0.0;
@@ -97,11 +98,11 @@ class task_space : public StackConfigurationDynamic, public JointConstraints
     }
 
 
-    std::vector<std::string> joint_names = stack->getJointNames();
+    std::vector<std::string> joint_names = stack->getWBCModelPtr()->getJointNames();
     Eigen::VectorXd reference_posture;
     pal::rbcomposite::URDFModel::getDefaultConfiguration(nh, "/zeros", joint_names,
                                                          reference_posture);
-    // reference_posture.setZero(stack->getNumberDofJointState());
+    // reference_posture.setZero(stack->getWBCModelPtr()->getNumberDofJointState());
 
     ReferenceDynamicPostureTaskMetaTaskPtr reference_task(new ReferenceDynamicPostureTaskMetaTask(
         "reference", stack.get(), joint_names, "vector_dynamic_reconfigure",
