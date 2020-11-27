@@ -102,7 +102,7 @@ class task_space : public StackConfigurationDynamic, public JointConstraints
     Eigen::VectorXd reference_posture;
     pal::rbcomposite::URDFModel::getDefaultConfiguration(nh, "/zeros", joint_names,
                                                          reference_posture);
-    // reference_posture.setZero(stack->getWBCModelPtr()->getNumberDofJointState());
+    // reference_posture.setZero(stack->getWBCModelPtr()->getJointStateSize());
 
     ReferenceDynamicPostureTaskMetaTaskPtr reference_task(new ReferenceDynamicPostureTaskMetaTask(
         "reference", stack.get(), joint_names, "vector_dynamic_reconfigure",
