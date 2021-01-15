@@ -70,6 +70,17 @@ int main(int argc, char **argv)
   target_position.point = pal::getParamPoint(nh, "target_position");
   target_orientation.quaternion = pal::getParamQuaternion(nh, "target_orientation");
 
+  // Position gain to reduce the position error in the task
+  // Higher gains imply higher velocities
+  double position_gain;
+  nh.param<double>("position_gain", position_gain, 1.0);
+
+  // Orientation gain to reduce the orientation error in the taks.
+  // Higher gains implies higher velocities.
+  double orientation_gain;
+  nh.param<double>("orientation_gain", orientation_gain, 1.0);
+
+
   // Order respect the previous task id
   pal_wbc_msgs::Order::_order_type order = pal_wbc_msgs::Order::After;
 
@@ -81,6 +92,8 @@ int main(int argc, char **argv)
   task.addProperty("signal_reference", reference_type);
   task.addProperty("tip_name", tip_name);
   task.addProperty("damping", 0.2);
+  task.addProperty("p_pos_gain", position_gain);
+  task.addProperty("p_orient_gain", orientation_gain);
 
   // If force torque is defined, add the specific properties for the admittance task
   if (!force_torque.empty())
