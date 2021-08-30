@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'relative_task_fix' into 'master'
+  Fix relative task missing gains
+  See merge request control/pal_wbc_utils!28
+* Fix relative task missing gains
+* Contributors: Adria Roig, victor
+
 0.0.20 (2020-07-28)
 -------------------
 * Merge branch 'documentation_review' into 'master'
