@@ -42,7 +42,7 @@ class joint_space_hold_position : public StackConfigurationDynamic, public Joint
 
 
 
-    std::vector<std::string> joint_names = stack->getJointNames();
+    std::vector<std::string> joint_names = stack->getWBCModelPtr()->getJointNames();
     Eigen::VectorXd reference_posture;
     pal::rbcomposite::URDFModel::getDefaultConfiguration(nh, "/zeros", joint_names,
                                                          reference_posture);
@@ -54,8 +54,8 @@ class joint_space_hold_position : public StackConfigurationDynamic, public Joint
     reference_task->setWeight(1);
 
     TorqueDampingDynamicTaskAllJointsMetaTaskPtr joint_torque_regularization(
-        new TorqueDampingDynamicTaskAllJointsMetaTask("torque_regularization", stack.get(),
-                                                      stack->getJointNames(), nh));
+        new TorqueDampingDynamicTaskAllJointsMetaTask(
+            "torque_regularization", stack.get(), stack->getWBCModelPtr()->getJointNames(), nh));
     joint_torque_regularization->setWeight(1e-4);
 
     task_container_vector objectiveTasks;

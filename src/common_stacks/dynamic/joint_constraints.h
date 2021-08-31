@@ -52,13 +52,17 @@ protected:
 
       if (0 == param.joint_names_.size())
       {
-        param.joint_names_ = stack->getJointNames();
+        param.joint_names_ = stack->getWBCModelPtr()->getJointNames();
 
-        pal::math_utils::copyVector(stack->getJointPositionLimitMin(), param.position_min_);
-        pal::math_utils::copyVector(stack->getJointPositionLimitMax(), param.position_max_);
+        pal::math_utils::copyVector(stack->getWBCModelPtr()->getJointPositionLimitMin(),
+                                    param.position_min_);
+        pal::math_utils::copyVector(stack->getWBCModelPtr()->getJointPositionLimitMax(),
+                                    param.position_max_);
 
-        pal::math_utils::copyVector(stack->getJointVelocityLimitMin(), param.velocity_min_);
-        pal::math_utils::copyVector(stack->getJointVelocityLimitMax(), param.velocity_max_);
+        pal::math_utils::copyVector(stack->getWBCModelPtr()->getJointVelocityLimitMin(),
+                                    param.velocity_min_);
+        pal::math_utils::copyVector(stack->getWBCModelPtr()->getJointVelocityLimitMax(),
+                                    param.velocity_max_);
       }
 
 
@@ -74,8 +78,8 @@ protected:
     {
       TorqueLimitDynamicAllJointsMetaTaskPtr torque_limits_task =
           boost::make_shared<TorqueLimitDynamicAllJointsMetaTask>(
-              "torque_limits", stack.get(), stack->getJointTorqueLimits(),
-              stack->getJointNames(), nh);
+              "torque_limits", stack.get(), stack->getWBCModelPtr()->getJointTorqueLimits(),
+              stack->getWBCModelPtr()->getJointNames(), nh);
       constraints.push_back(torque_limits_task);
     }
   }
