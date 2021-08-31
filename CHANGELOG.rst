@@ -2,6 +2,15 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'kangaroo_wbc' into 'master'
+  Kangaroo wbc
+  See merge request control/pal_wbc_utils!29
+* Rename functions for WBCModel
+* Fix WBCModel refactoring
+* Contributors: Adria Roig, victor
+
 0.0.21 (2021-08-30)
 -------------------
 * Merge branch 'relative_task_fix' into 'master'
