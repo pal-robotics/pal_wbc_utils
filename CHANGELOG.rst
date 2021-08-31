@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.22 (2021-08-31)
+-------------------
 * Merge branch 'kangaroo_wbc' into 'master'
   Kangaroo wbc
   See merge request control/pal_wbc_utils!29
