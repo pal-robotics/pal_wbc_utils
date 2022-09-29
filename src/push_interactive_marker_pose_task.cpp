@@ -145,11 +145,17 @@ int main(int argc, char **argv)
                      std::string("pal_wbc/GoToLocalVirtualAdmitanceOrientationMetaTask"));
   }
 
-  // Pushes the orientation task after the position task (lower priority)
-  if (!srv_helper.pushTask(task, std::string("orientation_" + tip_name), order,
-                           std::string("position_" + tip_name)))
+  bool orientation_task_activated;
+  nh.param("orientation_task_activated", orientation_task_activated, true);
+
+  if (orientation_task_activated)
   {
-    ROS_ERROR_STREAM("There was a problem pushing the orientation task");
+    // Pushes the orientation task after the position task (lower priority)
+    if (!srv_helper.pushTask(task, std::string("orientation_" + tip_name), order,
+                             std::string("position_" + tip_name)))
+    {
+      ROS_ERROR_STREAM("There was a problem pushing the orientation task");
+    }
   }
 
   return (0);
