@@ -274,6 +274,7 @@ respect_task_id | std::string | The position task is gonna be pushed after this 
 ns | std::string | Controller namespace. | /whole_body_kinematic_controller
 damping | double | Damping to avoid local minima. | By default is set to 0.2
 admitance_ft | std::string | FT name related to the controlled link. If ft name specified, it uses admitance control | By default is empty
+orientation_task_activated | boolean | The orientation task is not pushed inside the stack. Useful to avoid an over-constrained problem | By default is set to true
 
 > Warning: If the damping parameter is set to zero, the robot will start vibrating.
 
