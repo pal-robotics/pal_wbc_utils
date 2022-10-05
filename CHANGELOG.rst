@@ -2,6 +2,16 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'orientation-task-flag' into 'master'
+  Flag to check if the orientation task is required - push_interactive_marker_pose_task
+  See merge request control/pal_wbc_utils!30
+* descript fixed
+* add description to readme
+* orientation task flag on marker pose node added
+* Contributors: Adria Roig, ileniaperrella
+
 0.0.22 (2021-08-31)
 -------------------
 * Merge branch 'kangaroo_wbc' into 'master'
