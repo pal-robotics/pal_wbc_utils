@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 
   // Name of the link to be constrained
   std::string link_name;
-  nh.param<std::string>("link_name", link_name, "torso_1_link");
+  nh.param<std::string>("link_name", link_name, "torso_lift_link");
 
   // Name of the base frame
   std::string base_frame;
@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 
   // Task which respect the pose task is pushed
   std::string previous_task_id;
-  nh.param<std::string>("before_task_id", previous_task_id, "default_reference");
+  nh.param<std::string>("respect_task_id", previous_task_id, "self_collision");
 
   // Namespace of the controller
   std::string ns;
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
   pal::WBCServiceHelper srv_helper(nh, ns);
 
   // Order respect the previous task id
-  pal_wbc_msgs::Order::_order_type order = pal_wbc_msgs::Order::Before;
+  pal_wbc_msgs::Order::_order_type order = pal_wbc_msgs::Order::After;
 
   // Set all he properties in a property bag to push the task online
   property_bag::PropertyBag properties;
