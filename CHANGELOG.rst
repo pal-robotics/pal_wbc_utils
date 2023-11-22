@@ -2,8 +2,8 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.24 (2023-11-22)
+-------------------
 * Merge branch 'fix-torso-height' into 'master'
   update to push after the selfcollision task
   See merge request control/pal_wbc_utils!31
