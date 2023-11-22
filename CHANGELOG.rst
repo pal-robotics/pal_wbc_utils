@@ -2,6 +2,14 @@
 Changelog for package pal_wbc_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'fix-torso-height' into 'master'
+  update to push after the selfcollision task
+  See merge request control/pal_wbc_utils!31
+* update to push after the selfcollision task
+* Contributors: Sai Kishor Kothakota, ileniaperrella
+
 0.0.23 (2022-10-05)
 -------------------
 * Merge branch 'orientation-task-flag' into 'master'
